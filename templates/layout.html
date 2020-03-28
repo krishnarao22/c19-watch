@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+        <title>CoVID-Tracker: {% block title %}Home{% endblock %}</title>
+
+        <style>
+            html
+            {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            }
+            body
+            {
+                background-color:#303841;
+            }
+            nav
+            {
+                background-color:#3a4750;
+            }
+        </style>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="https://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+
+    </head>
+
+    <body>
+        <nav class = "navbar navbar-expand-lg">
+            <div class="navbar-brand" style="font-size: 30px; color:#eeeeee">
+                CoVID-19 Tracker
+            </div>
+        </nav>
+
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+
+    </body>
+
+</html>

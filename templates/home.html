@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="d-flex justify-content-center col-12 mt-5 mb-5">
+    <div id="mainMap" style="position: relative; width:100%; height: 700px"></div>
+        <script>
+        var mainMap = new Datamap({
+            scope: 'world',
+            element: document.getElementById("mainMap"),
+            fills: {
+                defaultFill: 'FFFFFF',
+                vlow: '#ffa6a6',
+                low: '#ff7575'
+            },
+            geographyConfig: {
+                hideAntarctica: true,
+                borderColor: '#000000',
+                popupTemplate: function(geography, data) { //this function should just return a string
+                    return '<div class="hoverinfo"><strong>' + geography.properties.name + '\nTotal Cases: ' + data.numCases + '</strong></div>';
+                },
+            },
+            data: {
+                AFG: {
+                    'fillKey': 'low',
+                    numCases: {{ numCasesDict["AFG"] }},
+                },
+                IRL: {
+                    'fillKey': 'vlow',
+                    numCases: 3,
+                },
+            },
+        });
+        </script>
+</div>
+{% endblock %}
