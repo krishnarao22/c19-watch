@@ -39,7 +39,6 @@ def home():
      'Andorra',
      'Angola',
      'Anguilla',
-     'Antigua And Barbuda',
      'Argentina',
      'Armenia',
      'Aruba',
@@ -225,12 +224,11 @@ def home():
      'Turkey',
      'Uganda',
      'Ukraine',
-     'United Arab Emirates',
-     'United Kingdom',
-     'United States',
+     'UAE',
+     'UK',
+     'USA',
      'Uruguay',
      'Uzbekistan',
-     'Vanuatu',
      'Vatican City',
      'Venezuela',
      'Vietnam',
@@ -242,16 +240,54 @@ def home():
     numTotalCasesDict = {}
     print(numTotalCasesDict)
 
+
     text = textract.process("Country.docx")
     text = text.decode()
     text = text.replace('\n', '')
-    index = text.find('Afghanistan')
     print(text)
-    print('––––––––––––––')
-    print(index)
-    substr = text[index + 11: index + 14]
-    print(substr)
-    print('–––––––––––––––')
-    print(countries)
+    print("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––")
+
+    for i in range(len(countries)):
+        index = text.find(countries[i])
+        if(countries[i] is 'USA' or countries[i] is 'Italy'):
+            isOK = True
+        else:
+            isOK = False
+        if index == -1:
+            numTotalCasesDict[i] = 'I don\'t know'
+            continue
+
+        substr = text[index + len(countries[i]) : index + len(countries[i]) + 7]
+
+        commaPresent = False
+
+        for char in substr:
+            if (not char.isdigit()) and (char is not ',') :
+                substr = substr[0 : substr.find(char)]
+            if char is ',':
+                commaPresent = True
+
+        if len(substr) == 7 and not isOK:
+            if commaPresent:
+                substr = substr[0 : 4]
+            else:
+                substr = substr[0 : 2]
+
+        if (len(substr) == 6 or len(substr) == 5 or len(substr) == 4) and not commaPresent:
+            substr = substr[0 : 2]
+
+        if len(substr) >= 4 and (substr[len(substr) - 1] is ','):
+            substr = substr[0 : 1]
+
+        if len(substr) == 0:
+            numTotalCasesDict[i] = 'I don\'t know'
+            continue
+
+        numTotalCasesDict[i] = substr
+
+
+    print(numTotalCasesDict)
+
     return render_template("home.html")
-    #return render_template("home.html", numCasesDict = numTotalCasesDict)
+
+    # return render_template("home.html", numCasesDict = numTotalCasesDict)
