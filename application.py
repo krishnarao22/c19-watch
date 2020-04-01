@@ -7,6 +7,10 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 import textract
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+import pycountry as pc
 
 
 # Lines 11 - 26 credit CS50
@@ -32,220 +36,73 @@ db = SQL("sqlite:///corona.db")
 @app.route("/")
 def home():
 
-    countries = [
-     'Afghanistan',
-     'Albania',
-     'Algeria',
-     'Andorra',
-     'Angola',
-     'Anguilla',
-     'Argentina',
-     'Armenia',
-     'Aruba',
-     'Australia',
-     'Austria',
-     'Azerbaijan',
-     'Bahamas',
-     'Bahrain',
-     'Bangladesh',
-     'Barbados',
-     'Belarus',
-     'Belgium',
-     'Belize',
-     'Benin',
-     'Bermuda',
-     'Bhutan',
-     'Bolivia',
-     'Bosnia And Herzegovina',
-     'Botswana',
-     'Brazil',
-     'Bulgaria',
-     'Burkina Faso',
-     'Cambodia',
-     'Cameroon',
-     'Canada',
-     'Cabo Verde',
-     'Cayman Islands',
-     'Central African Rep',
-     'Chad',
-     'Chile',
-     'China',
-     'Christmas Island',
-     'Cocos Islands',
-     'Colombia',
-     'Comoros',
-     'Congo',
-     'Cook Islands',
-     'Costa Rica',
-     'Cote D`ivoire',
-     'Croatia',
-     'Cuba',
-     'Cyprus',
-     'Czech Republic',
-     'Denmark',
-     'Djibouti',
-     'Dominica',
-     'Dominican Republic',
-     'East Timor',
-     'Ecuador',
-     'Egypt',
-     'El Salvador',
-     'Equatorial Guinea',
-     'Eritrea',
-     'Estonia',
-     'Ethiopia',
-     'Faroe Islands',
-     'Fiji',
-     'Finland',
-     'France',
-     'French Guiana',
-     'French Polynesia',
-     'Gabon',
-     'Gambia',
-     'Georgia',
-     'Germany',
-     'Ghana',
-     'Gibraltar',
-     'Greece',
-     'Greenland',
-     'Grenada',
-     'Guadeloupe',
-     'Guam',
-     'Guatemala',
-     'Guinea',
-     'Guinea-Bissau',
-     'Guyana',
-     'Haiti',
-     'Honduras',
-     'Hong Kong',
-     'Hungary',
-     'Iceland',
-     'India',
-     'Indonesia',
-     'Iran',
-     'Iraq',
-     'Ireland',
-     'Israel',
-     'Italy',
-     'Jamaica',
-     'Japan',
-     'Jordan',
-     'Kazakhstan',
-     'Kenya',
-     'Kiribati',
-     'S. Korea',
-     'Kuwait',
-     'Kyrgyzstan',
-     'Laos',
-     'Latvia',
-     'Lebanon',
-     'Lesotho',
-     'Liberia',
-     'Libya',
-     'Liechtenstein',
-     'Lithuania',
-     'Luxembourg',
-     'Macau',
-     'Macedonia',
-     'Madagascar',
-     'Malawi',
-     'Malaysia',
-     'Maldives',
-     'Mali',
-     'Malta',
-     'Marshall Islands',
-     'Martinique',
-     'Mauritania',
-     'Mauritius',
-     'Mayotte',
-     'Mexico',
-     'Micronesia',
-     'Moldova',
-     'Monaco',
-     'Mongolia',
-     'Montserrat',
-     'Morocco',
-     'Mozambique',
-     'Myanmar',
-     'Namibia',
-     'Nepal',
-     'Netherlands',
-     'New Caledonia',
-     'New Zealand',
-     'Nicaragua',
-     'Niger',
-     'Nigeria',
-     'Norway',
-     'Oman',
-     'Pakistan',
-     'Palau',
-     'Panama',
-     'Papua New Guinea',
-     'Paraguay',
-     'Peru',
-     'Philippines',
-     'Poland',
-     'Portugal',
-     'Puerto Rico',
-     'Qatar',
-     'Reunion',
-     'Romania',
-     'Russian Federation',
-     'Rwanda',
-     'Saint Kitts And Nevis',
-     'Saint Lucia',
-     'St Vincent/Grenadines',
-     'Samoa',
-     'San Marino',
-     'Sao Tome',
-     'Saudi Arabia',
-     'Senegal',
-     'Seychelles',
-     'Sierra Leone',
-     'Singapore',
-     'Slovakia',
-     'Slovenia',
-     'Somalia',
-     'South Africa',
-     'Spain',
-     'Sri Lanka',
-     'Sudan',
-     'Suriname',
-     'Swaziland',
-     'Sweden',
-     'Switzerland',
-     'Syria',
-     'Taiwan',
-     'Tanzania',
-     'Thailand',
-     'Togo',
-     'Trinidad And Tobago',
-     'Tunisia',
-     'Turkey',
-     'Uganda',
-     'Ukraine',
-     'UAE',
-     'UK',
-     'USA',
-     'Uruguay',
-     'Uzbekistan',
-     'Vatican City',
-     'Venezuela',
-     'Vietnam',
-     'Zambia',
-     'Zimbabwe'
-    ]
-
+    date='3/31/20'
 
     numTotalCasesDict = {}
+    colorDict={}
+    country3 = []
+
+    df = pd.read_csv('virusTable.csv')
+    country_column = df['Country/Region']
+    cases_column = df[date]
+    row_count = 0
+    chinaSum = 0
+    UKSum = 0
+
+    for i in range(0, 256):
+        print(country_column[i])
+        if country_column[i] == 'China':
+            chinaSum += cases_column[i]
+        elif country_column[i] == 'United Kingdom':
+            UKSum += cases_column[i]
+
+    print(chinaSum)
+    print('––––––––––––––––––')
+
+    # FIX UP SOME COUNTRIES
+    # COLOR SCHEME
+    # BEGIN OTHER PHASES.
+
+
+    for i in range(0, 256):
+        if country_column[i] == 'China':
+            numTotalCasesDict['CHN'] = chinaSum
+        elif country_column[i] == 'United Kingdom':
+            numTotalCasesDict['GBR'] = UKSum
+        elif country_column[i] == 'US':
+            numTotalCasesDict['USA'] = cases_column[i]
+        elif country_column[i] == 'Venezuela':
+            numTotalCasesDict['VEN'] = cases_column[i]
+        elif country_column[i] == 'Iran':
+            numTotalCasesDict['IRN'] = cases_column[i]
+        elif country_column[i] == 'Korea, South':
+            numTotalCasesDict['KOR'] = cases_column[i]
+        elif country_column[i] == 'Russia':
+            numTotalCasesDict['RUS'] = cases_column[i]
+        else:
+            try:
+                country = pc.countries.get(name = country_column[i])
+                numTotalCasesDict[country.alpha_3] = cases_column[i]
+            except:
+                continue
+
     print(numTotalCasesDict)
 
-
-    text = textract.process("Country.docx")
-    text = text.decode()
-    text = text.replace('\n', '')
-    print(text)
-    print("––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––")
+    """
+    def assignColor(index):
+        check = numTotalCasesDict[index]
+        if len(check) == 6:
+            return 'vhigh'
+        elif len(check) == 5:
+            return 'high'
+        elif len(check) == 4:
+            return 'med'
+        elif len(check) == 3:
+            return 'low'
+        elif check is 'I don\'t know':
+            return 'nothing'
+        else:
+            return 'vlow'
 
     for i in range(len(countries)):
         index = text.find(countries[i])
@@ -285,9 +142,35 @@ def home():
 
         numTotalCasesDict[i] = substr
 
+        colorDict[i] = assignColor(i)
 
+
+    print(colorDict)
     print(numTotalCasesDict)
 
-    return render_template("home.html")
+    print('––––––––––––––––––––––––––––––––––––')
+    print(colorDict[0])
 
-    # return render_template("home.html", numCasesDict = numTotalCasesDict)
+
+
+    website_url = requests.get('https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic_by_country_and_territory').text
+    soup = BeautifulSoup(website_url)
+    theTable = soup.find('table', {'class': 'wikitable plainrowheaders sortable'})
+    print(theTable)
+    links = theTable.findAll('a')
+    print(links)
+    countries = []
+    for link in links:
+        countries.append(link.get('title'))
+
+
+    countries = [c for c in countries if c != None]
+
+    countries = countries[3 : len(countries) - 1]
+
+    print(countries)
+    """
+
+    return render_template("home.html", theDict = numTotalCasesDict)
+
+    # return render_template("home.html", numCasesDict = numTotalCasesDict, colorDict = colorDict, countries3 = countries3)
