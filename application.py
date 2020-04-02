@@ -36,18 +36,21 @@ db = SQL("sqlite:///corona.db")
 @app.route("/")
 def home():
 
-    date='3/31/20'
+    date='4/1/20'
 
     numTotalCasesDict = {}
+    numDeathsDict = {}
     colorDict={}
-    country3 = []
 
-    df = pd.read_csv('virusTable.csv')
-    country_column = df['Country/Region']
-    cases_column = df[date]
+    tc = pd.read_csv('virusTable.csv')
+    country_column = tc['Country/Region']
+    province_column = tc['Province/State']
+    cases_column = tc[date]
     row_count = 0
     chinaSum = 0
     UKSum = 0
+    canadaSum = 0
+    auSum = 0
 
     for i in range(0, 256):
         print(country_column[i])
@@ -55,6 +58,10 @@ def home():
             chinaSum += cases_column[i]
         elif country_column[i] == 'United Kingdom':
             UKSum += cases_column[i]
+        elif country_column[i] == 'Canada':
+            canadaSum += cases_column[i]
+        elif country_column[i] == 'Australia':
+            auSum += cases_column[i]
 
     print(chinaSum)
     print('––––––––––––––––––')
@@ -69,6 +76,10 @@ def home():
             numTotalCasesDict['CHN'] = chinaSum
         elif country_column[i] == 'United Kingdom':
             numTotalCasesDict['GBR'] = UKSum
+        elif country_column[i] == 'Canada':
+            numTotalCasesDict['CAN'] = canadaSum
+        elif country_column[i] == 'Australia':
+            numTotalCasesDict['AUS'] = auSum
         elif country_column[i] == 'US':
             numTotalCasesDict['USA'] = cases_column[i]
         elif country_column[i] == 'Venezuela':
@@ -79,6 +90,8 @@ def home():
             numTotalCasesDict['KOR'] = cases_column[i]
         elif country_column[i] == 'Russia':
             numTotalCasesDict['RUS'] = cases_column[i]
+        elif country_column[i] == 'Denmark' and province_column[i] == 'Greenland':
+            numTotalCasesDict['GRL'] = cases_column[i]
         else:
             try:
                 country = pc.countries.get(name = country_column[i])
@@ -86,7 +99,65 @@ def home():
             except:
                 continue
 
+
+    dc = pd.read_csv('deathTable.csv')
+    D_country_column = dc['Country/Region']
+    D_province_column = dc['Province/State']
+    D_cases_column = dc[date]
+    row_count = 0
+    chinaDeathSum = 0
+    UKDeathSum = 0
+    canadaDeathSum = 0
+    auDeathSum = 0
+
+    print(D_country_column)
+    print(len(D_country_column))
+
+
+    for i in range(0, 256):
+        if D_country_column[i] == 'China':
+            chinaDeathSum += D_cases_column[i]
+        elif D_country_column[i] == 'United Kingdom':
+            UKDeathSum += D_cases_column[i]
+        elif D_country_column[i] == 'Canada':
+            canadaDeathSum += D_cases_column[i]
+        elif D_country_column[i] == 'Australia':
+            auDeathSum += D_cases_column[i]
+
+
+
+    for i in range(0,256):
+        if D_country_column[i] == 'China':
+            numDeathsDict['CHN'] = chinaDeathSum
+        elif D_country_column[i] == 'United Kingdom':
+            numDeathsDict['GBR'] = UKDeathSum
+        elif D_country_column[i] == 'US':
+            numDeathsDict['USA'] = D_cases_column[i]
+        elif D_country_column[i] == 'Canada':
+            numDeathsDict['CAN'] = canadaDeathSum
+        elif D_country_column[i] == 'Australia':
+            numDeathsDict['AUS'] = auDeathSum
+        elif D_country_column[i] == 'Venezuela':
+            numDeathsDict['VEN'] = D_cases_column[i]
+        elif D_country_column[i] == 'Iran':
+            numDeathsDict['IRN'] = D_cases_column[i]
+        elif D_country_column[i] == 'Korea, South':
+            numDeathsDict['KOR'] = D_cases_column[i]
+        elif D_country_column[i] == 'Russia':
+            numDeathsDict['RUS'] = D_cases_column[i]
+        elif D_country_column[i] == 'Denmark' and D_province_column[i] == 'Greenland':
+            numDeathsDict['GRL'] = D_cases_column[i]
+        else:
+            try:
+                country = pc.countries.get(name = D_country_column[i])
+                numDeathsDict[country.alpha_3] = D_cases_column[i]
+            except:
+                continue
+
+
+
     print(numTotalCasesDict)
+    print(numDeathsDict)
 
     """
     def assignColor(index):
@@ -171,6 +242,6 @@ def home():
     print(countries)
     """
 
-    return render_template("home.html", theDict = numTotalCasesDict)
+    return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict)
 
     # return render_template("home.html", numCasesDict = numTotalCasesDict, colorDict = colorDict, countries3 = countries3)

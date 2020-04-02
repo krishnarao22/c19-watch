@@ -21,7 +21,7 @@
                 hideAntarctica: true,
                 borderColor: '#000000',
                 popupTemplate: function(geography, data) { //this function should just return a string
-                    return '<div class="hoverinfo"><strong>' + geography.properties.name + '\nTotal Cases: ' + data.numCases + '</strong></div>';
+                    return '<div class="hoverinfo"><strong>' + geography.properties.name + '\nTotal Cases: ' + data.numCases + '\tTotal Deaths: ' + data.numDeaths + '</strong></div>';
                 },
             },
 
@@ -29,7 +29,8 @@
 
                 {% for c in theDict %}
                 {{ c }}: {
-                    numCases: {{ theDict[c]|string }}
+                    numCases: {{ theDict[c]|string }},
+                    numDeaths: {{ deathDict[c]|string }}
                 },
                 {% endfor %}
 
