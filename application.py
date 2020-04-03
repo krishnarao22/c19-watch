@@ -42,6 +42,25 @@ def home():
     numDeathsDict = {}
     colorDict={}
 
+    def getColor(country):
+        numCases = numTotalCasesDict[country]
+        numCases = int(numCases)
+        if numCases >= 100000:
+            return 'vhigh'
+        elif numCases >= 50000:
+            return 'high'
+        elif numCases >= 10000:
+            return 'medium'
+        elif numCases >= 1000:
+            return 'low'
+        else:
+            try:
+                int(numCases)
+                return 'vlow'
+            except:
+                return 'nothing'
+
+
     tc = pd.read_csv('virusTable.csv')
     country_column = tc['Country/Region']
     province_column = tc['Province/State']
@@ -63,8 +82,6 @@ def home():
         elif country_column[i] == 'Australia':
             auSum += cases_column[i]
 
-    print(chinaSum)
-    print('––––––––––––––––––')
 
     # FIX UP SOME COUNTRIES
     # COLOR SCHEME
@@ -90,8 +107,30 @@ def home():
             numTotalCasesDict['KOR'] = cases_column[i]
         elif country_column[i] == 'Russia':
             numTotalCasesDict['RUS'] = cases_column[i]
+        elif country_column[i] == 'Bolivia':
+            numTotalCasesDict['BOL'] = cases_column[i]
+        elif country_column[i] == 'Tanzania':
+            numTotalCasesDict['TZA'] = cases_column[i]
+        elif country_column[i] == 'Syria':
+            numTotalCasesDict['SYR'] = cases_column[i]
+        elif country_column[i] == 'Burma':
+            numTotalCasesDict['MMR'] = cases_column[i]
+        elif country_column[i] == 'Laos':
+            numTotalCasesDict['LAO'] = cases_column[i]
+        elif country_column[i] == 'Vietnam':
+            numTotalCasesDict['VNM'] = cases_column[i]
+        elif country_column[i] == 'Moldova':
+            numTotalCasesDict['MDA'] = cases_column[i]
+        elif country_column[i] == 'Brunei':
+            numTotalCasesDict['BRN'] = cases_column[i]
+        elif country_column[i] == 'Congo (Kinshasa)':
+            numTotalCasesDict['COD'] = cases_column[i]
+        elif country_column[i] == 'Congo (Brazzaville)':
+            numTotalCasesDict['COG'] = cases_column[i]
         elif country_column[i] == 'Denmark' and province_column[i] == 'Greenland':
             numTotalCasesDict['GRL'] = cases_column[i]
+        elif country_column[i] == 'France' and province_column[i] == 'French Guiana':
+            numTotalCasesDict['GUF'] = cases_column[i]
         else:
             try:
                 country = pc.countries.get(name = country_column[i])
@@ -109,9 +148,6 @@ def home():
     UKDeathSum = 0
     canadaDeathSum = 0
     auDeathSum = 0
-
-    print(D_country_column)
-    print(len(D_country_column))
 
 
     for i in range(0, 256):
@@ -145,8 +181,30 @@ def home():
             numDeathsDict['KOR'] = D_cases_column[i]
         elif D_country_column[i] == 'Russia':
             numDeathsDict['RUS'] = D_cases_column[i]
+        elif D_country_column[i] == 'Bolivia':
+            numDeathsDict['BOL'] = D_cases_column[i]
+        elif D_country_column[i] == 'Tanzania':
+            numDeathsDict['TZA'] = D_cases_column[i]
+        elif D_country_column[i] == 'Congo (Kinshasa)':
+            numDeathsDict['COD'] = D_cases_column[i]
+        elif D_country_column[i] == 'Congo (Brazzaville)':
+            numDeathsDict['COG'] = D_cases_column[i]
+        elif D_country_column[i] == 'Syria':
+            numDeathsDict['SYR'] = D_cases_column[i]
+        elif D_country_column[i] == 'Burma':
+            numDeathsDict['MMR'] = D_cases_column[i]
+        elif D_country_column[i] == 'Laos':
+            numDeathsDict['LAO'] = D_cases_column[i]
+        elif D_country_column[i] == 'Vietnam':
+            numDeathsDict['VNM'] = D_cases_column[i]
+        elif D_country_column[i] == 'Moldova':
+            numDeathsDict['MDA'] = D_cases_column[i]
+        elif D_country_column[i] == 'Brunei':
+            numDeathsDict['BRN'] = D_cases_column[i]
         elif D_country_column[i] == 'Denmark' and D_province_column[i] == 'Greenland':
             numDeathsDict['GRL'] = D_cases_column[i]
+        elif D_country_column[i] == 'France' and D_province_column[i] == 'French Guiana':
+            numDeathsDict['GUF'] = D_cases_column[i]
         else:
             try:
                 country = pc.countries.get(name = D_country_column[i])
@@ -155,9 +213,9 @@ def home():
                 continue
 
 
+    for c in numTotalCasesDict:
+        colorDict[c] = getColor(c)
 
-    print(numTotalCasesDict)
-    print(numDeathsDict)
 
     """
     def assignColor(index):
@@ -242,6 +300,6 @@ def home():
     print(countries)
     """
 
-    return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict)
+    return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict)
 
     # return render_template("home.html", numCasesDict = numTotalCasesDict, colorDict = colorDict, countries3 = countries3)

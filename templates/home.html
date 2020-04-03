@@ -15,7 +15,11 @@
             fills: {
                 defaultFill: 'FFFFFF',
                 'vlow': '#ffa6a6',
-                'low': '#ff7575'
+                'low': '#ff7575',
+                'medium': '#ed6b6b',
+                'high': '#ed5a5a',
+                'vhigh': '#eb2f2f',
+                'nothing': '#FFFFFF'
             },
             geographyConfig: {
                 hideAntarctica: true,
@@ -28,24 +32,24 @@
             data: {
 
                 {% for c in theDict %}
-                {{ c }}: {
-                    numCases: {{ theDict[c]|string }},
-                    numDeaths: {{ deathDict[c]|string }}
-                },
+                    {{ c }}: {
+                        fillKey: '{{ colorDict[c]|string }}',
+                        numCases: {{ theDict[c]|string }},
+                        numDeaths: {{ deathDict[c]|string }}
+                    },
                 {% endfor %}
-
-
-                /*
-                AFG: {
-                    numCases: '111'
-                },
-
-                */
 
             },
 
 
         });
         </script>
-</div>
+
+    </div>
+
+    <div class="col-12 d-flex justify-content-center">
+
+        <h5 style="color: white">* If a country is white, either this country has no cases :) <strong>or</strong> this website can't process the number of cases for this country :/</h5>
+
+    </div>
 {% endblock %}
