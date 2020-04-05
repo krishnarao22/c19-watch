@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Results!
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="d-flex col-12 justify-content-center">
+        <h1 style="color: white" class="mt-4">Your Results!</h1>
+    </div>
+    <div class="d-flex col-12 mt-5 justify-content-center">
+        <h5 style="color: white">We think you're {{ res[1] }} years old and are {{ res[0] }}.</h5>
+    </div>
+</div>
+{% endblock %}
