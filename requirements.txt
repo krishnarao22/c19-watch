@@ -5,7 +5,3 @@ requests
 pandas
 pycountry
 gunicorn
-opencv-python
-math
-time
-argparse
