@@ -29,7 +29,7 @@ def after_request(response):
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
-        date='4/1/20'
+        date='4/5/20'
 
         numTotalCasesDict = {}
         numDeathsDict = {}
