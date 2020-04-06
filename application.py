@@ -11,7 +11,6 @@ import pandas as pd
 import pycountry as pc
 
 
-
 # Lines 11 - 26 credit CS50
 # Configure application
 app = Flask(__name__)
@@ -25,9 +24,19 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+db = SQL("sqlite:///corona.db")
+
 # Configure session to use filesystem (instead of signed cookies)
 @app.route("/", methods=["GET", "POST"])
 def home():
+
+    views = db.execute("SELECT * FROM corona")
+    views = views[0]['views']
+    views += 1
+    db.execute("UPDATE corona SET views = :views", views = views)
+    print(db.execute("SELECT * FROM corona"))
+
+
     if request.method == "GET":
         date='4/1/20'
 
@@ -208,8 +217,4 @@ def home():
         for c in numTotalCasesDict:
             colorDict[c] = getColor(c)
 
-        return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict)
-
-    else:
-        res = [2,2]
-        return render_template("blank.html", res = res)
+        return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict, pageViews = views)
