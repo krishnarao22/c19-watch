@@ -9,7 +9,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import requests
 import pandas as pd
 import pycountry as pc
-from ageDetect import run
 
 
 
