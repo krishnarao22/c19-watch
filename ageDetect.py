@@ -38,7 +38,7 @@ def run(fin):
     genderModel = "gender_net.caffemodel"
 
     MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
-    ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-75)', '(75-100)']
+    ageList = ['(0-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
     genderList = ['Male', 'Female']
 
     # Load network
@@ -47,7 +47,7 @@ def run(fin):
     faceNet = cv.dnn.readNet(faceModel, faceProto)
 
     # Open a video file or an image file or a camera stream
-    cap = cv.VideoCapture(fin if fin else 1)
+    cap = cv.VideoCapture(fin)
     padding = 20
     while cv.waitKey(1) < 0:
         # Read frame
@@ -65,7 +65,6 @@ def run(fin):
         for bbox in bboxes:
             # print(bbox)
             face = frame[max(0,bbox[1]-padding):min(bbox[3]+padding,frame.shape[0]-1),max(0,bbox[0]-padding):min(bbox[2]+padding, frame.shape[1]-1)]
-
             blob = cv.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
             genderNet.setInput(blob)
             genderPreds = genderNet.forward()

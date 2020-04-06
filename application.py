@@ -217,5 +217,8 @@ def home():
         return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict)
 
     else:
-        res = run('jolie.jpg')
+        upload = request.files['face']
+        print(upload)
+        run(upload)
+        res = [2,2]
         return render_template("blank.html", res = res)

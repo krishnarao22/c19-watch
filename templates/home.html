@@ -128,7 +128,8 @@
     </div>
 
     <div class="d-flex flex-row justify-content-center m-5">
-        <form action="/" method="POST">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" accept="image/*" id="face" name="face">
             <input type="submit" class="btn btn-primary">
         </form>
     </div>
