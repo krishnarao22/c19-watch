@@ -5,3 +5,7 @@ requests
 pandas
 pycountry
 gunicorn
+cv2
+math
+time
+argparse
