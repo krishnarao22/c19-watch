@@ -128,51 +128,56 @@
     </div>
 </div>
 
-<div class="container-fluid mt-0" style="background-color:#292828; color:white">
+<div class="container-fluid mt-0 pb-5" style="background-color:#292828; color:white">
 
 
     <div class="d-flex justify-content-center pt-5">
         <h1>Your Chances.</h1>
     </div>
-    <div class="d-flex justify-content-center pt-2">
+    <div class="d-flex justify-content-center flex-col pt-2">
         <h4 style="color:#5b9df5">How likely are you to survive the virus?</h4>
     </div>
     <div class="d-flex justify-content-center">
-        <form class="mt-4" action="/" method="POST">
-            <div class="form-group">
-                <div>
-                    <label for="age"><strong>Age</strong></label>
+        <form class="mt-4" style="text-align:center" action="/" method="POST">
+            <div class="d-flex flex-column justify-content-center card p-5 shadow-lg" style="background-color:#37393b; border-radius:10%">
+                <div class="form-group mt-2">
+                    <div>
+                        <label for="age"><strong>Age</strong></label>
+                    </div>
+                    <select id="age" name="age">
+                        <option value="0-9">0-9</option>
+                        <option value="10-19">10-19</option>
+                        <option value="20-29">20-29</option>
+                        <option value="30-39">30-39</option>
+                        <option value="40-49">40-49</option>
+                        <option value="50-59">50-59</option>
+                        <option value="60-69">60-69</option>
+                        <option value="70-79">70-79</option>
+                        <option value="80+">80+</option>
+                    </select>
                 </div>
-                <select id="age">
-                    <option value="0-9">0-9</option>
-                    <option value="10-19">10-19</option>
-                    <option value="20-29">20-29</option>
-                    <option value="30-39">30-39</option>
-                    <option value="40-49">40-49</option>
-                    <option value="50-59">50-59</option>
-                    <option value="60-69">60-69</option>
-                    <option value="70-79">70-79</option>
-                    <option value="80+">80+</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <div>
-                    <label for="gender"><strong>Gender</strong></label>
+                <div class="form-group mt-2">
+                    <div>
+                        <label for="gender"><strong>Gender</strong></label>
+                    </div>
+                    <select id="gender" name="gender">
+                        <option value="m">Male</option>
+                        <option value="f">Female</option>
+                    </select>
                 </div>
-                <select id="gender">
-                    <option value="m">Male</option>
-                    <option value="f">Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="diseases">Diseases you may already have</label>
-                <select multiple class="form-control" id="diseases">
-                    <option value="cardio">Cardiovascular Disease</option>
-                    <option value="diabetes">Diabetes</option>
-                    <option value="resp">Chronic Respiratory Disease</option>
-                    <option value="hypertension">Hypertension</option>
-                    <option value="cancer">Cancer</option>
-                </select>
+                <div class="form-group mt-2">
+                    <label for="diseases">Diseases you may already have</label>
+                    <select multiple class="form-control" id="diseases" name="diseases">
+                        <option value="cardio">Cardiovascular Disease</option>
+                        <option value="diabetes">Diabetes</option>
+                        <option value="resp">Chronic Respiratory Disease</option>
+                        <option value="hypertension">Hypertension</option>
+                        <option value="cancer">Cancer</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit">
+                </div>
             </div>
         </form>
     </div>
@@ -180,10 +185,5 @@
 
 </div>
 
-<div class="footer text-small">
-    <div class="footer-copyright text-center pb-3" style="color:white">
-        &copy; 2020 <a href="https://github.com/krishnarao22">Krishna R.</a> GIFs from <a href="https://giphy.com/">Giphy</a>
-    </div>
-</div>
 
 {% endblock %}
