@@ -220,3 +220,71 @@ def home():
             colorDict[c] = getColor(c)
 
         return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict, pageViews = views)
+
+    else:
+        age = request.form.get("age")
+        print(age)
+        gender = request.form.get("gender")
+        print(gender)
+        diseases = request.form.getlist("diseases")
+        print(diseases)
+
+
+        def calcPercent(age, gender, diseases):
+            prob = 1.0
+
+            if age=="80+":
+                prob *= 0.142
+            elif age=="70-79":
+                prob *= .8
+            elif age=="60-69":
+                prob *= .36
+            elif age=="50-59":
+                prob *= .13
+            elif age=="40-49":
+                prob *= .04
+            else:
+                prob *= .02
+
+            if gender == "m":
+                prob *= 1.2
+            else:
+                prob *= .8
+
+            for d in diseases:
+                if d == "cardio":
+                    prob += .1028
+                elif d == "diabetes":
+                    prob += .073
+                elif d == "resp":
+                    prob += .063
+                elif d == "hypertension":
+                    prob += .06
+                elif d == "cancer":
+                    prob += .056
+                else:
+                    prob += .009
+
+            if prob >= .4:
+                prob *= .75
+
+            prob *= 100
+            prob = round(prob, 2)
+            return prob
+
+        chances = calcPercent(age, gender, diseases)
+        chances = 100 - chances
+
+        def getColor(prob):
+            if prob >= 95:
+                return "#58cf46"
+            elif prob > 90:
+                return "#66b518"
+            elif prob > 80:
+                return "#8eb518"
+            elif prob > 70:
+                return "#8eb518"
+            else:
+                return "#b54718"
+
+        return render_template("blank.html", prob = chances, color = getColor(chances))
