@@ -6,11 +6,30 @@
 
 {% block main %}
 <div class="container-fluid">
-    <div class="d-flex col-12 justify-content-center">
-        <h1 style="color: white" class="mt-4">Your Results!</h1>
+    <div class="d-flex mt-5 text-center justify-content-center">
+        <h2 style="color:white">Your chances of surviving the virus, if infected, are</h2>
     </div>
-    <div class="d-flex col-12 mt-5 justify-content-center">
-        <h5 style="color: white">We think you're {{ res[1] }} years old and are {{ res[0] }}.</h5>
+    <div class="d-flex mt-3 justify-content-center">
+        <h1 style="color:{{ color }}; font-size:50px">{{ prob }}%</h2>
     </div>
+    <div class="d-flex mt-5 justify-content-center">
+        <iframe src="https://giphy.com/embed/hpXFi66bfQm7e81ohw" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <h1 style="color:#5b9df5">How did we get this number?</h1>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <h5 style="color:white">We pulled some stats from <a href="https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/" style="color:inherit"><u>Worldometer</u></a>, did some not-so-mathematical magic, and got this number!</h1>
+    </div>
+    <div class="d-flex mt-5 justify-content-center">
+        <h1 style="color:#5b9df5"><u>Disclaimer</u></h1>
+    </div>
+    <div class="d-flex mt-3 justify-content-center">
+        <h5 style="color:white">This <u>IS NOT</u> the equivalent of any sort of medical test.</h5>
+    </div>
+    <div class="d-flex mt-2 pb-5 justify-content-center">
+        <h5 style="color:white">This is just a personal project. Don't take this number too seriously.</h5>
+    </div>
+
 </div>
 {% endblock %}
