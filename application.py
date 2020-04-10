@@ -287,4 +287,4 @@ def home():
             else:
                 return "#b54718"
 
-        return render_template("blank.html", prob = chances, color = getColor(chances))
+        return render_template("blank.html", prob = chances, color = getColor(chances), pageViews = views)
