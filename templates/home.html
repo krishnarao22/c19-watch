@@ -20,11 +20,11 @@
             element: document.getElementById("mainMap"),
             fills: {
                 defaultFill: '#2a2e2a',
-                'vlow': '#ffa6a6',
-                'low': '#ff7575',
-                'medium': '#ed6b6b',
-                'high': '#ef3a4b',
-                'vhigh': '#eb2f2f',
+                'vlow': '#f7c3c3',
+                'low': '#ed9a9a',
+                'medium': '#d16d6d',
+                'high': '#ed5f5f',
+                'vhigh': '#e34b4b',
                 'extreme': '#ff0000',
                 'nothing': '#2a2e2a'
             },
@@ -32,7 +32,7 @@
                 hideAntarctica: true,
                 borderColor: '#000000',
                 popupTemplate: function(geography, data) { //this function should just return a string
-                    return '<div class="hoverinfo"><strong>' + geography.properties.name + ', \nTotal Cases: ' + data.numCases + '\tTotal Deaths: ' + data.numDeaths + '</strong></div>';
+                    return '<div class="hoverinfo"><strong>' + geography.properties.name + ', <br>Total Cases: ' + data.numCases + '<br> Total Deaths: ' + data.numDeaths + '</strong></div>';
                 },
             },
 
@@ -60,23 +60,23 @@
                 <div style="width:10px; height:10px; background-color: #ff0000" class="mr-2"></div>More than 500,000 cases.
             </div>
             <div class="m-2">
-                <div style="width:10px; height:10px; background-color: #ef3a4b" class="mr-2"></div>More than 50,000 cases.
+                <div style="width:10px; height:10px; background-color: #ed5f5f" class="mr-2"></div>More than 50,000 cases.
             </div>
             <div class="m-2 mr-5 mt-3">
-                <div style="width:10px; height:10px; background-color: #ff7575" class="mr-5"></div>More than 1,000 cases.
+                <div style="width:10px; height:10px; background-color: #ed9a9a" class="mr-5"></div>More than 1,000 cases.
             </div>
 
         </div>
         <div>
 
             <div class="m-2 mb-3">
-                <div style="width:10px; height:10px; background-color: #eb2f2f" class="mr-2"></div>More than 100,000 cases.
+                <div style="width:10px; height:10px; background-color: #e34b4b" class="mr-2"></div>More than 100,000 cases.
             </div>
             <div class="m-2 mb-3">
-                <div style="width:10px; height:10px; background-color: #ed6b6b" class="mr-2"></div>More than 10,000 cases.
+                <div style="width:10px; height:10px; background-color: #d16d6d" class="mr-2"></div>More than 10,000 cases.
             </div>
             <div class="m-2 mb-3">
-                <div style="width:10px; height:10px; background-color: #ffa6a6" class="mr-2"></div>Less than 1,000 cases.
+                <div style="width:10px; height:10px; background-color: #f7c3c3" class="mr-2"></div>Less than 1,000 cases.
             </div>
         </div>
     </div>

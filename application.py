@@ -67,6 +67,7 @@ def home():
 
         tc = pd.read_csv('virusTable.csv')
         country_column = tc['Country/Region']
+        print(country_column)
         province_column = tc['Province/State']
         cases_column = tc[date]
         row_count = 0
@@ -74,8 +75,9 @@ def home():
         UKSum = 0
         canadaSum = 0
         auSum = 0
+        frSum = 0
 
-        for i in range(0, 256):
+        for i in range(0, 264):
             if country_column[i] == 'China':
                 chinaSum += cases_column[i]
             elif country_column[i] == 'United Kingdom':
@@ -84,6 +86,8 @@ def home():
                 canadaSum += cases_column[i]
             elif country_column[i] == 'Australia':
                 auSum += cases_column[i]
+            elif country_column[i] == 'France' and province_column[i] != 'French Guiana':
+                frSum += cases_column[i]
 
 
         # FIX UP SOME COUNTRIES
@@ -91,7 +95,7 @@ def home():
         # BEGIN OTHER PHASES.
 
 
-        for i in range(0, 256):
+        for i in range(0, 264):
             if country_column[i] == 'China':
                 numTotalCasesDict['CHN'] = chinaSum
             elif country_column[i] == 'United Kingdom':
@@ -100,6 +104,8 @@ def home():
                 numTotalCasesDict['CAN'] = canadaSum
             elif country_column[i] == 'Australia':
                 numTotalCasesDict['AUS'] = auSum
+            elif country_column[i] == 'France':
+                numTotalCasesDict['FRA'] = frSum
             elif country_column[i] == 'US':
                 numTotalCasesDict['USA'] = cases_column[i]
             elif country_column[i] == 'Venezuela':
@@ -130,6 +136,8 @@ def home():
                 numTotalCasesDict['COD'] = cases_column[i]
             elif country_column[i] == 'Congo (Brazzaville)':
                 numTotalCasesDict['COG'] = cases_column[i]
+            elif country_column[i] == 'Yemen':
+                numTotalCasesDict['YEM'] = cases_column[i]
             elif country_column[i] == 'Denmark' and province_column[i] == 'Greenland':
                 numTotalCasesDict['GRL'] = cases_column[i]
             elif country_column[i] == 'France' and province_column[i] == 'French Guiana':
@@ -151,9 +159,10 @@ def home():
         UKDeathSum = 0
         canadaDeathSum = 0
         auDeathSum = 0
+        frDeathSum = 0
 
 
-        for i in range(0, 256):
+        for i in range(0, 264):
             if D_country_column[i] == 'China':
                 chinaDeathSum += D_cases_column[i]
             elif D_country_column[i] == 'United Kingdom':
@@ -162,10 +171,12 @@ def home():
                 canadaDeathSum += D_cases_column[i]
             elif D_country_column[i] == 'Australia':
                 auDeathSum += D_cases_column[i]
+            elif D_country_column[i] == 'France' and D_province_column[i] != 'French Guiana':
+                frDeathSum += D_cases_column[i]
 
 
 
-        for i in range(0,256):
+        for i in range(0,264):
             if D_country_column[i] == 'China':
                 numDeathsDict['CHN'] = chinaDeathSum
             elif D_country_column[i] == 'United Kingdom':
@@ -204,6 +215,8 @@ def home():
                 numDeathsDict['MDA'] = D_cases_column[i]
             elif D_country_column[i] == 'Brunei':
                 numDeathsDict['BRN'] = D_cases_column[i]
+            elif D_country_column[i] == 'Yemen':
+                numDeathsDict['YEM'] = D_cases_column[i]
             elif D_country_column[i] == 'Denmark' and D_province_column[i] == 'Greenland':
                 numDeathsDict['GRL'] = D_cases_column[i]
             elif D_country_column[i] == 'France' and D_province_column[i] == 'French Guiana':
