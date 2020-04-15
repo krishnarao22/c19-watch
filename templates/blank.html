@@ -15,6 +15,21 @@
     <div class="d-flex mt-5 justify-content-center">
         <iframe src="https://giphy.com/embed/hpXFi66bfQm7e81ohw" width="350" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
     </div>
+    <div class="d-flex flex-column mt-5 text-center justify-content-center">
+        {% if chanceType == 'high' %}
+            <h2 style="color:{{ color }}">Great going! Make sure to keep washing your hands and maintain social distance. Watch out for others in your family who may be more vulnerable!</h2>
+        {% elif chanceType == 'medium' %}
+            <h2 style="color:{{ color }}">Good job! Make sure to follow appropriate health guidelines, and try to stay indoors!</h2>
+        {% elif chanceType == 'low' %}
+            <h2 style="color:{{ color }}">That's OK! Make sure to stay indoors as much as you can, and follow all health guidelines strictly!</h2>
+            <br>
+            <h2 style="color:{{ color }}">We will get through this!</h2>
+        {% else %}
+            <h2 style="color:{{ color }}"><strong>Please stay at home at all times!</strong> Maintain social distancing very strictly, and stay <strong>far away</strong> from anyone who seems infected.</h2>
+            <br>
+            <h2 style="color:{{ color }}">While you are more vulnerable to this disease, don't worry! We will get through this!</h2>
+        {% endif %}
+    </div>
     <div class="d-flex justify-content-center mt-5">
         <h1 style="color:#5b9df5">How did we get this number?</h1>
     </div>
