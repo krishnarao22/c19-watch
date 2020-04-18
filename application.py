@@ -32,12 +32,12 @@ def home():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 4
+    views += 10
     db.execute("UPDATE corona SET views = :views", views = views)
 
 
     if request.method == "GET":
-        date='4/13/20'
+        date='4/17/20'
 
         numTotalCasesDict = {}
         numDeathsDict = {}
