@@ -87,15 +87,96 @@
         <h6 style="color: white">* If a country is dark gray, either this country has no cases :) <strong>or</strong> this website can't process the number of cases for this country :/</h6>
     </div>
 
+    <div class="container-fluid pt-5 pb-4" id="chart">
+
+            <script>
+                var options = {
+                  series: [{
+                  name: 'Infected',
+                  data: [{{ total }}]
+                }, {
+                  name: 'Recovered',
+                  data: [{{ recovered }}]
+                }, {
+                  name: 'Deaths',
+                  data: [{{ deaths }}]
+                }],
+                  chart: {
+                  type: 'bar',
+                  height: 300,
+                  stacked: true,
+                  foreColor: '#fff',
+                  style: {
+                    fontSize: '14px'
+                  },
+                },
+                fill: {
+                  colors: ['#FFFFFF', '#E91E63', '#9C27B0']
+                },
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                  },
+                },
+                stroke: {
+                  width: 2,
+                  colors: ['#fff']
+                },
+                title: {
+                  text: 'Coronavirus'
+                },
+                style: {
+                    fontSize: '14px'
+                },
+                xaxis: {
+                  categories: ["Total"],
+                  labels: {
+                    formatter: function (val) {
+                      return val
+                    },
+                  }
+                },
+                yaxis: {
+                  title: {
+                    text: undefined
+                  },
+                },
+                tooltip: {
+                  y: {
+                    formatter: function (val) {
+                      return val
+                    }
+                  },
+                  style: {
+                    fontSize: '14px',
+                  }
+                },
+                fill: {
+                  opacity: 1
+                },
+                legend: {
+                  position: 'top',
+                  horizontalAlign: 'left',
+                  offsetX: 40
+                }
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+
+            </script>
+        </canvas>
+    </div>
+
 </div>
 
 
 <div class="container-fluid pb-3" style="background-color:#2b2b2b; color:white">
     <div class="d-flex justify-content-center mt-3 pt-5">
-        <h1>How can we defeat the unseen enemy?</h1>
+        <h1>How can we Defeat the Unseen Enemy?</h1>
     </div>
     <div class="d-flex justify-content-center pt-2">
-        <h4 style="color:#5b9df5">You can save a life.</h4>
+        <h4 style="color:#5b9df5">You can save a Life.</h4>
     </div>
 </div>
 
@@ -195,6 +276,7 @@
                         <option value="resp">Chronic Respiratory Disease</option>
                         <option value="hypertension">Hypertension</option>
                         <option value="cancer">Cancer</option>
+                        <option default autofocus>None, I'm healthy!</option>
                     </select>
                 </div>
                 <div class="form-group mt-3">

@@ -37,7 +37,7 @@ def home():
 
 
     if request.method == "GET":
-        date='4/17/20'
+        date='4/18/20'
 
         numTotalCasesDict = {}
         numDeathsDict = {}
@@ -46,7 +46,7 @@ def home():
         def getColor(country):
             numCases = numTotalCasesDict[country]
             numCases = int(numCases)
-            if numCases >= 500000:
+            if numCases >= 200000:
                 return 'extreme'
             elif numCases >= 100000:
                 return 'vhigh'
@@ -230,7 +230,26 @@ def home():
         for c in numTotalCasesDict:
             colorDict[c] = getColor(c)
 
-        return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict, pageViews = views)
+
+        deathCount = 0
+        for deaths in D_cases_column:
+            deathCount += deaths
+        totalCases = 0
+        for cases in cases_column:
+            totalCases += cases
+        rc = pd.read_csv('recoveredTable.csv')
+        recoveredCol = rc[date]
+        recoveredCount = 0
+        for rv in recoveredCol:
+            recoveredCount += rv
+        totalCases -= (recoveredCount + deathCount)
+
+        print("––––––––––––––––––––––––")
+        print(totalCases)
+        print(deathCount)
+        print(recoveredCount)
+
+        return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict, pageViews = views, total = totalCases, deaths = deathCount, recovered = recoveredCount)
 
     else:
         age = request.form.get("age")
@@ -307,5 +326,6 @@ def home():
                 return 'low'
             else:
                 return 'vlow'
+
 
         return render_template("blank.html", prob = chances, color = getColor(chances), pageViews = views, chanceType = classChance(chances))
