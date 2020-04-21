@@ -68,6 +68,7 @@ def home():
         country_column = tc['Country/Region']
         province_column = tc['Province/State']
         cases_column = tc[date]
+        print(cases_column)
         row_count = 0
         chinaSum = 0
         UKSum = 0
