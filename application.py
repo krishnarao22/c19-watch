@@ -37,7 +37,7 @@ def home():
 
 
     if request.method == "GET":
-        date='4/18/20'
+        date='4/19/20'
 
         numTotalCasesDict = {}
         numDeathsDict = {}
@@ -64,29 +64,11 @@ def home():
                     return 'nothing'
 
 
-        tc = pd.read_csv('virusTable.csv')
-        country_column = tc['Country/Region']
-        province_column = tc['Province/State']
-        cases_column = tc[date]
+        tc = pd.read_csv('countries.csv')
+        country_column = tc['location']
+        cases_column = tc['confirmed']
         print(cases_column)
-        row_count = 0
-        chinaSum = 0
-        UKSum = 0
-        canadaSum = 0
-        auSum = 0
-        frSum = 0
 
-        for i in range(0, 264):
-            if country_column[i] == 'China':
-                chinaSum += cases_column[i]
-            elif country_column[i] == 'United Kingdom':
-                UKSum += cases_column[i]
-            elif country_column[i] == 'Canada':
-                canadaSum += cases_column[i]
-            elif country_column[i] == 'Australia':
-                auSum += cases_column[i]
-            elif country_column[i] == 'France' and province_column[i] != 'French Guiana':
-                frSum += cases_column[i]
 
 
         # FIX UP SOME COUNTRIES
@@ -94,24 +76,14 @@ def home():
         # BEGIN OTHER PHASES.
 
 
-        for i in range(0, 264):
-            if country_column[i] == 'China':
-                numTotalCasesDict['CHN'] = chinaSum
-            elif country_column[i] == 'United Kingdom':
-                numTotalCasesDict['GBR'] = UKSum
-            elif country_column[i] == 'Canada':
-                numTotalCasesDict['CAN'] = canadaSum
-            elif country_column[i] == 'Australia':
-                numTotalCasesDict['AUS'] = auSum
-            elif country_column[i] == 'France':
-                numTotalCasesDict['FRA'] = frSum
-            elif country_column[i] == 'US':
+        for i in range(0, 230):
+            if country_column[i] == 'United States':
                 numTotalCasesDict['USA'] = cases_column[i]
             elif country_column[i] == 'Venezuela':
                 numTotalCasesDict['VEN'] = cases_column[i]
             elif country_column[i] == 'Iran':
                 numTotalCasesDict['IRN'] = cases_column[i]
-            elif country_column[i] == 'Korea, South':
+            elif country_column[i] == 'South Korea':
                 numTotalCasesDict['KOR'] = cases_column[i]
             elif country_column[i] == 'Russia':
                 numTotalCasesDict['RUS'] = cases_column[i]
@@ -131,16 +103,14 @@ def home():
                 numTotalCasesDict['MDA'] = cases_column[i]
             elif country_column[i] == 'Brunei':
                 numTotalCasesDict['BRN'] = cases_column[i]
-            elif country_column[i] == 'Congo (Kinshasa)':
+            elif country_column[i] == 'DR Congo':
                 numTotalCasesDict['COD'] = cases_column[i]
-            elif country_column[i] == 'Congo (Brazzaville)':
+            elif country_column[i] == 'Republic of the Congo':
                 numTotalCasesDict['COG'] = cases_column[i]
             elif country_column[i] == 'Yemen':
                 numTotalCasesDict['YEM'] = cases_column[i]
-            elif country_column[i] == 'Denmark' and province_column[i] == 'Greenland':
-                numTotalCasesDict['GRL'] = cases_column[i]
-            elif country_column[i] == 'France' and province_column[i] == 'French Guiana':
-                numTotalCasesDict['GUF'] = cases_column[i]
+            elif country_column[i] == 'UK':
+                numTotalCasesDict['GBR'] = cases_column[i]
             else:
                 try:
                     country = pc.countries.get(name = country_column[i])
@@ -149,80 +119,45 @@ def home():
                     continue
 
 
-        dc = pd.read_csv('deathTable.csv')
-        D_country_column = dc['Country/Region']
-        D_province_column = dc['Province/State']
-        D_cases_column = dc[date]
+        D_cases_column = tc['dead']
         row_count = 0
-        chinaDeathSum = 0
-        UKDeathSum = 0
-        canadaDeathSum = 0
-        auDeathSum = 0
-        frDeathSum = 0
 
-
-        for i in range(0, 264):
-            if D_country_column[i] == 'China':
-                chinaDeathSum += D_cases_column[i]
-            elif D_country_column[i] == 'United Kingdom':
-                UKDeathSum += D_cases_column[i]
-            elif D_country_column[i] == 'Canada':
-                canadaDeathSum += D_cases_column[i]
-            elif D_country_column[i] == 'Australia':
-                auDeathSum += D_cases_column[i]
-            elif D_country_column[i] == 'France' and D_province_column[i] != 'French Guiana':
-                frDeathSum += D_cases_column[i]
-
-
-
-        for i in range(0,264):
-            if D_country_column[i] == 'China':
-                numDeathsDict['CHN'] = chinaDeathSum
-            elif D_country_column[i] == 'United Kingdom':
-                numDeathsDict['GBR'] = UKDeathSum
-            elif D_country_column[i] == 'US':
-                numDeathsDict['USA'] = D_cases_column[i]
-            elif D_country_column[i] == 'Canada':
-                numDeathsDict['CAN'] = canadaDeathSum
-            elif D_country_column[i] == 'Australia':
-                numDeathsDict['AUS'] = auDeathSum
-            elif D_country_column[i] == 'Venezuela':
+        for i in range(0,230):
+            if country_column[i] == 'Venezuela':
                 numDeathsDict['VEN'] = D_cases_column[i]
-            elif D_country_column[i] == 'Iran':
+            elif country_column[i] == 'Iran':
                 numDeathsDict['IRN'] = D_cases_column[i]
-            elif D_country_column[i] == 'Korea, South':
+            elif country_column[i] == 'South Korea':
                 numDeathsDict['KOR'] = D_cases_column[i]
-            elif D_country_column[i] == 'Russia':
+            elif country_column[i] == 'Russia':
                 numDeathsDict['RUS'] = D_cases_column[i]
-            elif D_country_column[i] == 'Bolivia':
+            elif country_column[i] == 'Bolivia':
                 numDeathsDict['BOL'] = D_cases_column[i]
-            elif D_country_column[i] == 'Tanzania':
+            elif country_column[i] == 'Tanzania':
                 numDeathsDict['TZA'] = D_cases_column[i]
-            elif D_country_column[i] == 'Congo (Kinshasa)':
+            elif country_column[i] == 'DR Congo':
                 numDeathsDict['COD'] = D_cases_column[i]
-            elif D_country_column[i] == 'Congo (Brazzaville)':
+            elif country_column[i] == 'Republic of the Congo':
                 numDeathsDict['COG'] = D_cases_column[i]
-            elif D_country_column[i] == 'Syria':
+            elif country_column[i] == 'Syria':
                 numDeathsDict['SYR'] = D_cases_column[i]
-            elif D_country_column[i] == 'Burma':
+            elif country_column[i] == 'Burma':
                 numDeathsDict['MMR'] = D_cases_column[i]
-            elif D_country_column[i] == 'Laos':
+            elif country_column[i] == 'Laos':
                 numDeathsDict['LAO'] = D_cases_column[i]
-            elif D_country_column[i] == 'Vietnam':
+            elif country_column[i] == 'Vietnam':
                 numDeathsDict['VNM'] = D_cases_column[i]
-            elif D_country_column[i] == 'Moldova':
+            elif country_column[i] == 'Moldova':
                 numDeathsDict['MDA'] = D_cases_column[i]
-            elif D_country_column[i] == 'Brunei':
+            elif country_column[i] == 'Brunei':
                 numDeathsDict['BRN'] = D_cases_column[i]
-            elif D_country_column[i] == 'Yemen':
+            elif country_column[i] == 'Yemen':
                 numDeathsDict['YEM'] = D_cases_column[i]
-            elif D_country_column[i] == 'Denmark' and D_province_column[i] == 'Greenland':
-                numDeathsDict['GRL'] = D_cases_column[i]
-            elif D_country_column[i] == 'France' and D_province_column[i] == 'French Guiana':
-                numDeathsDict['GUF'] = D_cases_column[i]
+            elif country_column[i] == 'UK':
+                numDeathsDict['GBR'] = D_cases_column[i]
             else:
                 try:
-                    country = pc.countries.get(name = D_country_column[i])
+                    country = pc.countries.get(name = country_column[i])
                     numDeathsDict[country.alpha_3] = D_cases_column[i]
                 except:
                     continue
@@ -238,8 +173,7 @@ def home():
         totalCases = 0
         for cases in cases_column:
             totalCases += cases
-        rc = pd.read_csv('recoveredTable.csv')
-        recoveredCol = rc[date]
+        recoveredCol = tc['recovered']
         recoveredCount = 0
         for rv in recoveredCol:
             recoveredCount += rv
