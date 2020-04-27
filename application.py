@@ -111,6 +111,8 @@ def home():
                 numTotalCasesDict['YEM'] = cases_column[i]
             elif country_column[i] == 'UK':
                 numTotalCasesDict['GBR'] = cases_column[i]
+            elif country_column[i] == 'Czech Republic':
+                numTotalCasesDict['CZE'] = cases_column[i]
             else:
                 try:
                     country = pc.countries.get(name = country_column[i])
@@ -155,6 +157,8 @@ def home():
                 numDeathsDict['YEM'] = D_cases_column[i]
             elif country_column[i] == 'UK':
                 numDeathsDict['GBR'] = D_cases_column[i]
+            elif country_column[i] == 'Czech Republic':
+                numDeathsDict['CZE'] = D_cases_column[i]
             else:
                 try:
                     country = pc.countries.get(name = country_column[i])
