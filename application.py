@@ -46,7 +46,7 @@ def home():
         def getColor(country):
             numCases = numTotalCasesDict[country]
             numCases = int(numCases)
-            if numCases >= 200000:
+            if numCases >= 1000000:
                 return 'extreme'
             elif numCases >= 100000:
                 return 'vhigh'
@@ -113,6 +113,8 @@ def home():
                 numTotalCasesDict['GBR'] = cases_column[i]
             elif country_column[i] == 'Czech Republic':
                 numTotalCasesDict['CZE'] = cases_column[i]
+            elif country_column[i] == 'Ivory Coast':
+                numTotalCasesDict['CIV'] = cases_column[i]
             else:
                 try:
                     country = pc.countries.get(name = country_column[i])
@@ -159,6 +161,8 @@ def home():
                 numDeathsDict['GBR'] = D_cases_column[i]
             elif country_column[i] == 'Czech Republic':
                 numDeathsDict['CZE'] = D_cases_column[i]
+            elif country_column[i] == 'Ivory Coast':
+                numDeathsDict['CIV'] = D_cases_column[i]
             else:
                 try:
                     country = pc.countries.get(name = country_column[i])

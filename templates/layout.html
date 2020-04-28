@@ -28,6 +28,7 @@
             {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 color: white;
+                scroll-behavior: smooth;
             }
             body
             {
@@ -48,9 +49,21 @@
 
     <body>
         <nav class = "navbar navbar-expand-lg">
-            <div class="container-fluid pt-1 justify-content-center">
-                <div style="width:100px;height:100px;position:relative;"><iframe src="https://giphy.com/embed/YPhuwt9pV2XLM2HIq4" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed mr-3" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/coronavirus-covid-19-YPhuwt9pV2XLM2HIq4"></a></p>
-                <h1 class="ml-5" style="font-size: 60px; font-weight:500; color:#ff0000"><a href="/" style="color:inherit">CoVID-19 Watch</a></h1>
+            <div class="container-fluid">
+            <ul class="navbar-nav nav-left">
+                <li>
+                    <a class="nav-link" href="/#defeatEnemy">Protect yourself</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <div style="width:100px;height:100px;position:relative;"><iframe src="https://giphy.com/embed/YPhuwt9pV2XLM2HIq4" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed mr-3" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/coronavirus-covid-19-YPhuwt9pV2XLM2HIq4" target="_blank"></a></p>
+                <h1 class="ml-5 mt-2" style="font-size: 60px; font-weight:500; color:#ff0000"><a href="/" style="color:inherit">CoVID-19 Watch</a></h1>
+            </ul>
+            <ul class="navbar-nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/#healthCheck">Check your health</a>
+                </li>
+            </ul>
             </div>
         </nav>
 
@@ -60,7 +73,7 @@
 
         <footer class="footer pb-4 pt-4">
             <div class="footer-copyright text-center" style="color:white">
-                &copy; 2020 <a href="https://github.com">KR</a>. GIFs from <a href="giphy.com">GIPHY</a>. Data from <a href="https://www.trackcorona.live/">TrackCorona.live</a> and <a href="https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/">Worldometers</a>. Map created with <a href="https://datamaps.github.io/">Datamaps</a>. Bar Chart made with <a href="https://apexcharts.com/">ApexCharts.js</a>. <strong>Pageviews: {{ pageViews }}</strong>
+                &copy; 2020 <a href="https://github.com" target="_blank">KR</a>. GIFs from <a href="giphy.com" target="_blank">GIPHY</a>. Data from <a href="https://www.trackcorona.live/" target="_blank">TrackCorona.live</a> and <a href="https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/" target="_blank">Worldometers</a>. Map created with <a href="https://datamaps.github.io/" target="_blank">Datamaps</a>. Bar Chart made with <a href="https://apexcharts.com/" target="_blank">ApexCharts.js</a>. <strong>Pageviews: {{ pageViews }}</strong>
             </div>
         </footer>
 
