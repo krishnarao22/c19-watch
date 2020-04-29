@@ -265,16 +265,14 @@ def results():
     chances = 100 - chances
 
     def getColor(prob):
-        if prob >= 95:
+        if prob >= 90:
             return "#02b552"
-        elif prob > 90:
-            return "#007525"
         elif prob > 80:
-            return "#618500"
+            return "#759c00"
         elif prob > 70:
-            return "#6a8500"
+            return "#979c00"
         else:
-            return "#8da600"
+            return "#c22400"
 
     def classChance(prob):
         if prob >= 90:
