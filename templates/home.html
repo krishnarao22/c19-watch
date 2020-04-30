@@ -55,7 +55,9 @@
     </div>
 
     <div class="col-12 d-flex flex-row justify-content-center pb-3" style="color: black">
+
         <div class="mr-5">
+            <strong>
             <div class="m-2 mb-3">
                 <div style="width:10px; height:10px; background-color: #ff0000" class="mr-2"></div>More than 500,000 cases.
             </div>
@@ -65,10 +67,11 @@
             <div class="m-2 mr-5 mt-3">
                 <div style="width:10px; height:10px; background-color: #ed9a9a" class="mr-5"></div>More than 1,000 cases.
             </div>
-
+            </strong>
         </div>
-        <div>
 
+        <div>
+            <strong>
             <div class="m-2 mb-3">
                 <div style="width:10px; height:10px; background-color: #e34b4b" class="mr-2"></div>More than 100,000 cases.
             </div>
@@ -78,12 +81,14 @@
             <div class="m-2 mb-3">
                 <div style="width:10px; height:10px; background-color: #f7c3c3" class="mr-2"></div>Less than 1,000 cases.
             </div>
+            </strong>
         </div>
+
     </div>
 
 
 
-    <div class="col-12 d-flex justify-content-center pb-3">
+    <div class="col-12 d-flex justify-content-center pb-3 mt-5">
         <h6 style="color: black">* If a country is dark gray, either this country has no cases :) <strong>or</strong> this website can't process the number of cases for this country :/</h6>
     </div>
 
@@ -92,7 +97,7 @@
     </div>
 
 
-    <div class="container-fluid pt-5 pb-4 ml-0 mr-0 mb-5" style="background-color:#22313f" id="chart">
+    <div class="container-fluid pt-5 pb-5 ml-0 mr-0 mb-5 mt-5" style="background-color:#22313f" id="chart">
 
             <script>
                 var options = {
@@ -235,7 +240,7 @@
 
 </div>
 
-<div class="container-fluid mt-0 pb-5" style="background-color:#e4f1fe; color:white" id="healthCheck">
+<div class="container-fluid mt-0 pb-5" style="background-color:#d1e8ff; color:white" id="healthCheck">
 
     <div class="d-flex justify-content-center pt-5">
         <h1 style="color:black">Check Up!</h1>
@@ -274,12 +279,12 @@
                 <div class="form-group mt-2">
                     <label for="diseases">Diseases you may already have</label>
                     <select multiple class="form-control" id="diseases" name="diseases">
+                        <option selected>None, I'm healthy!</option>
                         <option value="cardio">Cardiovascular Disease</option>
                         <option value="diabetes">Diabetes</option>
                         <option value="resp">Chronic Respiratory Disease</option>
                         <option value="hypertension">Hypertension</option>
                         <option value="cancer">Cancer</option>
-                        <option default autofocus>None, I'm healthy!</option>
                     </select>
                 </div>
                 <div class="form-group mt-3">
@@ -288,8 +293,9 @@
             </div>
         </form>
     </div>
-
-
+    <div class="d-flex justify-content-center flex-col pt-2 mt-5">
+        <h6 style="color:black">*On desktop, hold ctrl/cmd and click to select multiple diseases.</h6>
+    </div>
 </div>
 
 {% endblock %}
