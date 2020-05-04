@@ -36,7 +36,7 @@ def home():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 70
+    views += 79
     db.execute("UPDATE corona SET views = :views", views = views)
 
 
