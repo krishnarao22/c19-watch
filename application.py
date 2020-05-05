@@ -41,7 +41,6 @@ def home():
 
 
     if request.method == "GET":
-        date='4/19/20'
 
         numTotalCasesDict = {}
         numDeathsDict = {}
