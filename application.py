@@ -283,5 +283,5 @@ def results():
         else:
             return 'vlow'
 
-
     return render_template("blank.html", prob = chances, color = getColor(chances), pageViews = views, chanceType = classChance(chances))
+    
