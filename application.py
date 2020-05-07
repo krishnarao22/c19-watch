@@ -36,7 +36,7 @@ def home():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 1
+    views += 79
     db.execute("UPDATE corona SET views = :views", views = views)
 
 
@@ -79,7 +79,7 @@ def home():
         # BEGIN OTHER PHASES.
 
 
-        for i in range(0, 230):
+        for i in range(0, 223):
             if country_column[i] == 'United States':
                 numTotalCasesDict['USA'] = cases_column[i]
             elif country_column[i] == 'Venezuela':
@@ -129,7 +129,7 @@ def home():
         D_cases_column = tc['dead']
         row_count = 0
 
-        for i in range(0,230):
+        for i in range(0,223):
             if country_column[i] == 'Venezuela':
                 numDeathsDict['VEN'] = D_cases_column[i]
             elif country_column[i] == 'Iran':
@@ -215,7 +215,7 @@ def results():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 1
+    views += 79
     db.execute("UPDATE corona SET views = :views", views = views)
 
     def calcPercent(age, gender, diseases):
