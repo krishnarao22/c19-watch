@@ -36,7 +36,7 @@ def home():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 79
+    views += 1
     db.execute("UPDATE corona SET views = :views", views = views)
 
 
@@ -215,7 +215,7 @@ def results():
 
     views = db.execute("SELECT * FROM corona")
     views = views[0]['views']
-    views += 79
+    views += 1
     db.execute("UPDATE corona SET views = :views", views = views)
 
     def calcPercent(age, gender, diseases):
