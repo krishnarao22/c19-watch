@@ -112,7 +112,7 @@ def home():
                 numTotalCasesDict['COG'] = cases_column[i]
             elif country_column[i] == 'Yemen':
                 numTotalCasesDict['YEM'] = cases_column[i]
-            elif country_column[i] == 'UK':
+            elif country_column[i] == 'United Kingdom':
                 numTotalCasesDict['GBR'] = cases_column[i]
             elif country_column[i] == 'Czech Republic':
                 numTotalCasesDict['CZE'] = cases_column[i]
@@ -160,7 +160,7 @@ def home():
                 numDeathsDict['BRN'] = D_cases_column[i]
             elif country_column[i] == 'Yemen':
                 numDeathsDict['YEM'] = D_cases_column[i]
-            elif country_column[i] == 'UK':
+            elif country_column[i] == 'United Kingdom':
                 numDeathsDict['GBR'] = D_cases_column[i]
             elif country_column[i] == 'Czech Republic':
                 numDeathsDict['CZE'] = D_cases_column[i]
