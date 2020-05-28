@@ -30,7 +30,6 @@ age=None
 gender=None
 diseases=None
 
-# Configure session to use filesystem (instead of signed cookies)
 @app.route("/", methods=["GET", "POST"])
 def home():
 
