@@ -69,7 +69,6 @@ def home():
         tc = pd.read_csv('countries.csv')
         country_column = tc['location']
         cases_column = tc['confirmed']
-        print(cases_column)
 
 
 
@@ -189,11 +188,6 @@ def home():
             recoveredCount += rv
         totalCases -= (recoveredCount + deathCount)
 
-        print("––––––––––––––––––––––––")
-        print(totalCases)
-        print(deathCount)
-        print(recoveredCount)
-
         return render_template("home.html", theDict = numTotalCasesDict, deathDict = numDeathsDict, colorDict = colorDict, pageViews = views, total = totalCases, deaths = deathCount, recovered = recoveredCount)
 
     else:
@@ -201,11 +195,8 @@ def home():
         global gender
         global diseases
         age = request.form.get("age")
-        print(age)
         gender = request.form.get("gender")
-        print(gender)
         diseases = request.form.getlist("diseases")
-        print(diseases)
 
         return redirect("/results")
 
